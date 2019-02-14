@@ -1,0 +1,17 @@
+{
+  "name": "websocketforchatapp",
+  "version": "1.0.0",
+  "description": "WebSocket Server for Chat App ",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tauqueer",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.16.4",
+    "uuid": "^3.3.2",
+    "ws": "6.1.3"
+  }
+}
