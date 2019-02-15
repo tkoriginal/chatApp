@@ -4,7 +4,7 @@ function Chatbar ({currentUser, addMessage, setCurrentUser}) {
   const name = () => {
     return currentUser.name ? currentUser.name : 'Anonymous'
   }
-  function onKeyPress (username) {
+  function sendMessage (username) {
     const type = 'postMessage'
     return function event (e) {
       if(e.key === 'Enter') {
@@ -13,13 +13,18 @@ function Chatbar ({currentUser, addMessage, setCurrentUser}) {
       }
     }
   }
-  function setUser(e) {
-    setCurrentUser(e.target.value);
+
+  function updateUser (e) {
+    if(e.key === 'Enter') {
+      e.target.value !== currentUser.name ? setCurrentUser(currentUser.name, e.target.value) : null;
+    }
   }
+
+
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" value={currentUser.name} onChange={setUser}  placeholder="Your Name (Optional)" />
-        <input className="chatbar-message" name="message" onKeyPress={onKeyPress(name())} placeholder="Type a message and hit ENTER" />
+        <input className="chatbar-username" defaultValue={currentUser.name} onKeyPress={updateUser} placeholder="Your Name (Optional)" />
+        <input className="chatbar-message" name="message" onKeyPress={sendMessage(name())} placeholder="Type a message and hit ENTER" />
       </footer>
     )
 }
