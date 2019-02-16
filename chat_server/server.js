@@ -7,7 +7,7 @@ const PORT = 3001;
 const server = express()
   .use(express.static('public'))
   .listen(PORT, '0.0.0.0', 'localhost', () => console.log(`Listening on ${PORT}`));
-
+//check for 
 const giffyTest = (text) => {
   return !!(text.match(/\/giffy (.+)/));
 }
@@ -43,7 +43,8 @@ wss.on('connection', (ws) => {
     message = JSON.parse(message);
     message.id = uuid();
     if(giffyTest(message.content)){
-      fetch(`http://api.giphy.com/v1/gifs/search?api_key=I1Utz0W5UJVY5czMtnSgV41QUocCV704&q=${message.content}&limit=1`)
+      const gifText = message.content.match(/\/giffy (.+)/)[1];
+      fetch(`http://api.giphy.com/v1/gifs/search?api_key=I1Utz0W5UJVY5czMtnSgV41QUocCV704&q=${gifText}&limit=1`)
         .then(response => response.json())
         .then(response => {
           let data = response.data[0];
